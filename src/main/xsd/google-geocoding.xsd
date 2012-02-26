@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.kben.org/google-geocode"
+	xmlns:tns="http://www.kben.org/google-geocode" elementFormDefault="unqualified">
+
+	<complexType name="GeocodeResponse">
+		<sequence>
+			<element name="status" type="tns:Status"></element>
+			<element name="result" type="tns:Result" minOccurs="0"
+				maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AddressComponent">
+		<sequence>
+			<element name="long_name" type="string"></element>
+			<element name="short_name" type="string"></element>
+			<element name="type" type="tns:AddressComponentType"
+				maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="AddressComponentType">
+		<restriction base="string">
+			<enumeration value="street_address"></enumeration>
+			<enumeration value="route"></enumeration>
+			<enumeration value="intersection"></enumeration>
+			<enumeration value="political"></enumeration>
+			<enumeration value="country"></enumeration>
+			<enumeration value="administrative_area_level_1">
+			</enumeration>
+			<enumeration value="administrative_area_level_2">
+			</enumeration>
+			<enumeration value="administrative_area_level_3">
+			</enumeration>
+			<enumeration value="colloquial_area"></enumeration>
+			<enumeration value="locality"></enumeration>
+			<enumeration value="sublocality"></enumeration>
+			<enumeration value="neighborhood"></enumeration>
+			<enumeration value="premise"></enumeration>
+			<enumeration value="subpremise"></enumeration>
+			<enumeration value="postal_code"></enumeration>
+			<enumeration value="natural_feature"></enumeration>
+			<enumeration value="airport">
+			</enumeration>
+			<enumeration value="park">
+			</enumeration>
+			<enumeration value="point_of_interest"></enumeration>
+
+			<enumeration value="post_box"></enumeration>
+			<enumeration value="street_number"></enumeration>
+			<enumeration value="floor"></enumeration>
+			<enumeration value="room"></enumeration>
+		</restriction>
+	</simpleType>
+	
+	<complexType name="Result">
+		<sequence>
+			<element name="type" type="tns:ResultType">
+
+			</element>
+			<element name="formatted_address" type="string"></element>
+			<element name="address_component"
+				type="tns:AddressComponent" minOccurs="0" maxOccurs="unbounded">
+			</element>
+            <element name="geometry" type="tns:Geometry"></element>
+        </sequence>
+	</complexType>
+
+	<simpleType name="Status">
+		<restriction base="string">
+			<enumeration value="OK"></enumeration>
+			<enumeration value="ZERO_RESULTS"></enumeration>
+			<enumeration value="OVER_QUERY_LIMIT"></enumeration>
+			<enumeration value="REQUEST_DENIED"></enumeration>
+			<enumeration value="INVALID_REQUEST"></enumeration>
+		</restriction>
+	</simpleType>
+
+
+
+
+	<simpleType name="ResultType">
+		<restriction base="string">
+			<enumeration value="street_address"></enumeration>
+			<enumeration value="route"></enumeration>
+			<enumeration value="intersection"></enumeration>
+			<enumeration value="political"></enumeration>
+			<enumeration value="country"></enumeration>
+			<enumeration value="administrative_area_level_1">
+			</enumeration>
+			<enumeration value="administrative_area_level_2">
+			</enumeration>
+			<enumeration value="administrative_area_level_3">
+			</enumeration>
+			<enumeration value="colloquial_area"></enumeration>
+			<enumeration value="locality"></enumeration>
+			<enumeration value="sublocality"></enumeration>
+			<enumeration value="neighborhood"></enumeration>
+			<enumeration value="premise"></enumeration>
+			<enumeration value="subpremise"></enumeration>
+			<enumeration value="postal_code"></enumeration>
+			<enumeration value="natural_feature"></enumeration>
+			<enumeration value="airport">
+			</enumeration>
+			<enumeration value="park">
+			</enumeration>
+			<enumeration value="point_of_interest"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<complexType name="Location">
+		<sequence>
+			<element name="lat" type="double"></element>
+			<element name="lng" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="LocationType">
+		<restriction base="string">
+			<enumeration value="ROOFTOP"></enumeration>
+			<enumeration value="RANGE_INTERPOLATED"></enumeration>
+			<enumeration value="GEOMETRIC_CENTER"></enumeration>
+			<enumeration value="APPROXIMATE"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<complexType name="Geometry">
+		<sequence>
+			<element name="location" type="tns:Location"></element>
+			<element name="location_type" type="tns:LocationType"></element>
+			<element name="viewport" type="tns:Viewport"></element>
+			<element name="bounds" type="tns:Viewport"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Viewport">
+		<sequence>
+			<element name="southwest" type="tns:Location"></element>
+			<element name="northeast" type="tns:Location"></element>
+		</sequence>
+	</complexType>
+
+    <element name="GeocodeResponse" type="tns:GeocodeResponse"></element>
+</schema>
